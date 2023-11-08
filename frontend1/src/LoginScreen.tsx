@@ -12,6 +12,7 @@ function LoginScreen() {
         <>
             <div>
                 <img src={reactLogo} className="logo react" alt="Logo"/>
+                <h2>LOG IN</h2>
 
                 <div>
                     <input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder='Username'/>
