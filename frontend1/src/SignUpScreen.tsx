@@ -31,6 +31,7 @@ function SignUpScreen() {
             setErrorMessageVisible(true)
         }
         else {
+            // temp; in the future this should instead tell the backend to create a new account
             setErrorMessageVisible(false)
         }
     }
