@@ -5,10 +5,35 @@ import reactLogo from './assets/react.svg' // temp logo
 
 import './App.css'
 
+
+const testTakenUsername = "username1"
+
+const usernameTakenErrorMsg = "Username has already been taken!"
+const emptyFieldsErrorMsg = "Please fill out all required fields!"
+
+
 function SignUpScreen() {
     const[username,setUsername] = useState('')
     const[password,setPassword] = useState('')
 
+    const[errorMessageVisible,setErrorMessageVisible] = useState(false)
+
+    const[errorMsg, setErrorMsg] = useState(usernameTakenErrorMsg)
+
+    function continueButtonHandler() {
+        if(username == "" || password == "") {
+            setErrorMsg(emptyFieldsErrorMsg)
+            setErrorMessageVisible(true)
+        }
+        // this is where database connection should go
+        else if(username == testTakenUsername) {
+            setErrorMsg(usernameTakenErrorMsg)
+            setErrorMessageVisible(true)
+        }
+        else {
+            setErrorMessageVisible(false)
+        }
+    }
 
     return(
         <>
@@ -21,9 +46,11 @@ function SignUpScreen() {
                     <br/>
                     <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder='Password'/>
                 </div>
+                <p hidden={!errorMessageVisible}>{errorMsg}</p> 
+                <br/>
 
                 <button>Back</button>
-                <button>Continue</button>
+                <button onClick={continueButtonHandler}>Continue</button>
 
             </div>
         </>
