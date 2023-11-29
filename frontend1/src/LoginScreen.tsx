@@ -33,7 +33,7 @@ function LoginScreen() {
                         if(username == testUsername && password == testPassword) {
                             // correct username handling here
                             setLoginErrorDisplayed(false)
-                            navigate("/login")
+                            navigate("/app")
                         }
                         else {
                             setLoginErrorDisplayed(true)
