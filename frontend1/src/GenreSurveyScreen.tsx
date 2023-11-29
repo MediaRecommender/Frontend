@@ -3,8 +3,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg' // temp logo
 
 
-import './App.css'
-
 interface Genre {
     name:string;
 }
