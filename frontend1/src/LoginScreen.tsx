@@ -1,17 +1,21 @@
 import { useState } from 'react'
 
 import reactLogo from './assets/react.svg' // temp logo
+import { useNavigate } from "react-router-dom";
 
-import './App.css'
+//import './App.css'
 
 const testUsername = "username1"
 const testPassword = "password1"
+
 
 function LoginScreen() {
     const[username,setUsername] = useState('');
     const[password,setPassword] = useState('');
 
     const[loginErrorDisplayed, setLoginErrorDisplayed] = useState(false);
+    
+    const navigate = useNavigate();
 
     return(
         <>
@@ -29,6 +33,7 @@ function LoginScreen() {
                         if(username == testUsername && password == testPassword) {
                             // correct username handling here
                             setLoginErrorDisplayed(false)
+                            navigate("/login")
                         }
                         else {
                             setLoginErrorDisplayed(true)
@@ -37,7 +42,7 @@ function LoginScreen() {
                     <p hidden={!loginErrorDisplayed}>Incorrect username or password!</p>
                 </div>
                 
-                <button>Sign Up</button>
+                <button onClick={()=>{navigate("signup")}}>Sign Up</button>
 
             </div>
         </>

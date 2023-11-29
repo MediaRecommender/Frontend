@@ -1,9 +1,7 @@
 import { useState } from 'react'
 
 import reactLogo from './assets/react.svg' // temp logo
-
-
-import './App.css'
+import { useNavigate } from "react-router-dom";
 
 
 const testTakenUsername = "username1"
@@ -20,6 +18,8 @@ function SignUpScreen() {
 
     const[errorMsg, setErrorMsg] = useState(usernameTakenErrorMsg)
 
+    const navigate = useNavigate();
+
     function continueButtonHandler() {
         if(username == "" || password == "") {
             setErrorMsg(emptyFieldsErrorMsg)
@@ -33,6 +33,8 @@ function SignUpScreen() {
         else {
             // temp; in the future this should instead tell the backend to create a new account
             setErrorMessageVisible(false)
+
+            navigate("/genresurvey")
         }
     }
 
@@ -50,7 +52,7 @@ function SignUpScreen() {
                 <p hidden={!errorMessageVisible}>{errorMsg}</p> 
                 <br/>
 
-                <button>Back</button>
+                <button onClick={()=>navigate("/")}>Back</button>
                 <button onClick={continueButtonHandler}>Continue</button>
 
             </div>
