@@ -1,22 +1,4 @@
-.checkbox ol {
-    margin: 10px;
-    list-style: none;
-    float: left
-}
-.playlist {
-    overflow: hidden;
-    color:white;
-    display: block;
-    max-height: 600px;
-    width:75%;
-    overflow-y:scroll;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: -5%;
-    font-family: Georgia;
-    padding: 10p[];
-  }
-  .playlist ol {
+.playlist ol {
     list-style-position:inside;
     list-style-type: none;
     counter-reset: mycounter;
@@ -38,24 +20,7 @@
   .playlist li:nth-child(even) {
     background-color: #2F2F2F;
   }
-  .songSelect {
-    color:white;
-    margin: auto;
-    width: 71%;
-    padding-bottom: 10px;
-  }
-  .body {
-    margin: 0;
-    height: 100%;
-    width: 100vw;
-    background-color: #494949;
-  }
-  .center {
-    margin: 0;
-    height: 100%;
-    width: 100vw;
-    background-color: #494949;
-  }
+  
   ::-webkit-scrollbar {
     width: 20px;
   }

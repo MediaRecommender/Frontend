@@ -4,8 +4,8 @@ import TopBar from './TopBar.tsx'
 
 function Playlists() {
   return (
-    <div>
-      <h1 className = "playlistTitle">Playlist</h1>
+    <>
+      <h1>Playlist</h1>
       <nav className='playlist'>
         <ol className="songs">
           <li>Sunshine On My Shoulders - John Denver</li>
@@ -40,17 +40,13 @@ function Playlists() {
           <li>Leader of the Band - Dan Fogelberg</li>            
         </ol>
       </nav>
-    </div>
+    </>
     )
   }
   function PlaylistScreen() {
     const [count, setCount] = useState(0)
     return (
-    <body className="body">
-      <div className="center">
         <Playlists />
-      </div>
-    </body>
     )
   }
   
