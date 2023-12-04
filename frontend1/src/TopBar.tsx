@@ -23,10 +23,10 @@ function TopBar() {
           <Link to="/app">Your Playlist</Link>
           <Link to="/app/genresurvey">Genre Survey</Link>
           <Link to="/app/songsurvey">Song Survey</Link>
-          <Link to="/app/delete">Delete Account</Link>
+          <Link to="/app/delete" className="deleteButton">Delete Account</Link>
         </div>
       </div>
-      <button className="abutton topbarItem" onClick={logoutUser}>Logout</button>
+      <button className="abutton topbarItem dbutton" onClick={logoutUser}>Logout</button>
       
     </div>
   )

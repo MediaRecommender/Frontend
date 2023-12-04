@@ -14,11 +14,13 @@
   --a_lightpurple: #564f6f;
   --a_darkgray: #4C495D;
   --a_offwhite: #D1D7E0;
+  --a_red: #EA5260;
+  --a_darkpurple: #261F33;
 }
 
 a {
   font-weight: 500;
-  color: var(--a_darkgray);
+  color: var(--a_magenta);
   cursor: pointer;
 }
 
@@ -92,6 +94,10 @@ body {
   text-align: left;
 }
 
+.backButton {
+  background-color: var(--a_red);
+}
+
 input {
   background-color: var(--a_lightpurple);
   color: var(--a_offwhite);
@@ -117,7 +123,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: var(--a_magenta);
-  color: var(--a_dullpurple);
+  color: var(--a_offwhite);
   cursor: pointer;
   transition: border-color 0.25s;
 }

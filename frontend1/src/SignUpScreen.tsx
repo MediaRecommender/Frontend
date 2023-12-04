@@ -53,7 +53,7 @@ function SignUpScreen() {
                     <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder='Password'/>
                 <p hidden={!errorMessageVisible}>{errorMsg}</p> 
                 <br/>
-                <button onClick={()=>navigate("/")}>Back</button>
+                <button className='backButton' onClick={()=>navigate("/")}>Back</button>
                 <button onClick={continueButtonHandler}>Continue</button>
                 </div>
 

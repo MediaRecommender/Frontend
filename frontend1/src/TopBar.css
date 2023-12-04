@@ -6,17 +6,21 @@
   font-family: Georgia;
   font-weight: bold;
   font-size: 48px;
-  color: var(--a_offwhite);
+  color: var(--dark);
   background-color: var(--a_lightpurple);
   padding: 16px;
   border: none;
   display: inline-block;
 }
 
+.dbutton {
+  background-color: var(--a_red);
+}
+
 .topBar {
   display: flex;
   overflow-y: visible;
-  background-color: var(--a_dullpurple);
+  background-color: var(--a_darkpurple);
   top: 0;
   width: 100%;
   height: 15%;
@@ -61,4 +65,12 @@
 
 .dropdown:hover .account-button {
   background-color: #3e8e41;
+}
+
+.dropdown-content .deleteButton {
+  color:var(--a_red);
+}
+
+.dropdown-content .deleteButton:hover {
+  background-color:var(--a_red);
 }
