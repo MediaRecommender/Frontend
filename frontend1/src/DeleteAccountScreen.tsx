@@ -18,7 +18,7 @@ function Delete() {
       </div>
       <div className='loginContainer'>
         <div className='login'>
-                    <img src = "Spotify.png" className="logo"></img>
+                    <img src = "/Spotify.png" className="deleteLogo"></img>
                     <input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder='Username'/>
                     <input value={password} onChange={e => setPassword(e.target.value)} type= "password" placeholder='Password'/>
                     <button onClick={()=>{

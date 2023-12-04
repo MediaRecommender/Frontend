@@ -11,6 +11,21 @@
     border: none;
     min-width: 225px;
   }
+  .logOut{
+    font-family: Georgia;
+    font-weight: bold;
+    font-size: 60px;
+    margin:auto;
+    color:white;
+    max-height: 125px;
+    background-color: #1AB26B;
+    color: white;
+    padding: 16px;
+    border: none;
+    min-width: 225px;
+    float: right;
+    margin: 20px;
+  }
   .topBar {
     overflow-y: visible;
     background-color: #000000;
