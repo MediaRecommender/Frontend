@@ -22,10 +22,10 @@ function TopBar() {
       <div className="dropdown">
         <button className="account-button">{username == null ? "not found":username}</button>
         <div className="dropdown-content">
-        <Link to="playlist">Your Playlist</Link>
-        <Link to="genresurvey">Genre Survey</Link>
-        <Link to="songsurvey">Song Survey</Link>
-        <Link to="delete">Delete Account</Link>
+        <Link to="/app">Your Playlist</Link>
+        <Link to="/app/genresurvey">Genre Survey</Link>
+        <Link to="/app/songsurvey">Song Survey</Link>
+        <Link to="/app/delete">Delete Account</Link>
         </div>
       </div>
 </div>
