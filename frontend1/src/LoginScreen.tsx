@@ -12,6 +12,7 @@ const testPassword = "password1"
 
 
 function LoginScreen() {
+
     var currentUser = window.localStorage.getItem("username");
 
     const navigate = useNavigate();
@@ -26,29 +27,32 @@ function LoginScreen() {
         var loginSuccess = true;
 
         try {
-            // fetch is the http request
+            // attempt the http request
+            // fetch is javascript's built-in http request
             const response = await fetch(api + "/login", {
                 method: "POST",
-                // data is to be sent in a simple two-attribute object
+                // data is to be sent in a simple two-attribute object in the JSON format
                 body: JSON.stringify({
                     "username": username,
                     "password": password,
                 }),
+                // this only header tells the API that we are sending data in JSON
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-Type": "application/json"
                 }
             });
 
-            const responsejson = await response.json();
+            // if the http request succeeds, attempt to parse the response as JSON
+            const responseObject = await response.json();
 
+            // if we get past this point, responseObject is now a javascript object
             // backend told me the response should be a simple object with two attributes: "success", a boolean, and "message", a string
-            const responseObject = JSON.parse(responsejson)
-
-            loginSuccess = responseObject.success
-            console.log(responseObject.message)
+            loginSuccess = responseObject.success;
+            console.log(responseObject.message);
         }
+        // if anything goes wrong in the entire process, log the error to the console
         catch(error) {
-            console.error("http request failed");
+            console.error("http request failed: " + error);
             loginSuccess = false;
         }
 
@@ -66,7 +70,6 @@ function LoginScreen() {
             setLoginErrorDisplayed(true)
         }
     }
-
 
     return (
         <>
