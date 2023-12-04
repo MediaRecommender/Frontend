@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import reactLogo from './assets/react.svg' // temp logo
 
+import { useNavigate } from "react-router-dom";
 
 interface Genre {
     name:string;
@@ -22,13 +23,15 @@ const GENRES = [
 const rowCount = 3;
 
 function GenreSurveyScreen() {
+    const navigate = useNavigate();
+
     return(
         <>
             <h1>Genre Survey</h1>
             <div className='panel'>
                 <p>Please indicate which genres you are interested in:</p>
                 <GenresTable genres={GENRES}/>
-                <button>Confirm</button>
+                <button onClick={()=>navigate("/app/songsurvey")}>Confirm</button>
             </div>
         </>
     )
