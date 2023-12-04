@@ -24,6 +24,12 @@
   height: 15%;
 }
 
+.logo {
+  width: 15%;
+  height: auto;
+  object-fit: contain;
+}
+
 .dropdown {
   margin-left: auto;
 }
