@@ -47,7 +47,6 @@ function Playlists() {
     const [count, setCount] = useState(0)
     return (
     <body className="body">
-      <TopBar />
       <div className="center">
         <Playlists />
       </div>
