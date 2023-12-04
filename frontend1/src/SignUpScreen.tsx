@@ -40,20 +40,22 @@ function SignUpScreen() {
 
     return(
         <>
-            <div>
-                <img src={reactLogo} className="logo react" alt="Logo"/>
+            <div className = "textcenter contentdiv">
+                <div className = "disp">
+                    <img src={reactLogo} className="logo react" alt="Logo" />
+                    <h1>Media Recommender</h1>
+                </div>
                 <br/>
+                <div className='textcenter panel'>
                 <h2>CREATE PROFILE</h2>
-                <div>
                     <input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder='Username'/>
                     <br/>
                     <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder='Password'/>
-                </div>
                 <p hidden={!errorMessageVisible}>{errorMsg}</p> 
                 <br/>
-
                 <button onClick={()=>navigate("/")}>Back</button>
                 <button onClick={continueButtonHandler}>Continue</button>
+                </div>
 
             </div>
         </>

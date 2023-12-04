@@ -32,6 +32,7 @@ function LoginScreen() {
             const response = await fetch(api + "/login", {
                 method: "POST",
                 // data is to be sent in a simple two-attribute object in the JSON format
+                // (for other stuff later, this is how to send data)
                 body: JSON.stringify({
                     "username": username,
                     "password": password,
@@ -47,6 +48,7 @@ function LoginScreen() {
 
             // if we get past this point, responseObject is now a javascript object
             // backend told me the response should be a simple object with two attributes: "success", a boolean, and "message", a string
+            // (for other stuff later we'll need to confer with backend)
             loginSuccess = responseObject.success;
             console.log(responseObject.message);
         }
@@ -73,11 +75,14 @@ function LoginScreen() {
 
     return (
         <>
-            <div>
-                <img src={reactLogo} className="logo react" alt="Logo" />
-                <h2>LOG IN</h2>
+            <div className = "textcenter contentdiv">
+                <div className = "disp">
+                    <img src={reactLogo} className="logo react" alt="Logo" />
+                    <h1>Media Recommender</h1>
+                </div>
 
-                <div>
+                <div className="textcenter panel">
+                    <p hidden={!loginErrorDisplayed}>Incorrect username or password!</p>
                     <input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder='Username' />
                     <br />
                     <input value={password} onChange={e => setPassword(e.target.value)} type="password" placeholder='Password' />
@@ -85,10 +90,9 @@ function LoginScreen() {
                     <button onClick={() => {
                         loginHandler()
                     }}>Log In</button>
-                    <p hidden={!loginErrorDisplayed}>Incorrect username or password!</p>
                 </div>
 
-                <button onClick={() => { navigate("signup") }}>Sign Up</button>
+                <a className='registerlink' onClick={() => { navigate("signup") }}>Don't have an account? Register here!</a>
 
             </div>
         </>
