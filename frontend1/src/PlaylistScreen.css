@@ -7,7 +7,8 @@
   margin-left: auto;
   margin-right: auto;
   font-family: Georgia;
-  padding: 10p[];
+  border-radius: 30px;
+
 }
 .playlist ol {
   list-style-position:inside;
@@ -19,6 +20,7 @@
   padding:7px;
   padding-left: 12px;
   white-space:pre;
+  margin:0;
 }
 .playlist li:before {
   content: counter(mycounter) "    ";

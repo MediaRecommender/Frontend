@@ -5,7 +5,8 @@ import TopBar from './TopBar.tsx'
 function Playlists() {
   return (
     <>
-      <h1>Playlist</h1>
+    <h1>Your Playlist</h1>
+      <div className='textcenter panel wider'>
       <nav className='playlist'>
         <ol className="songs">
           <li>Sunshine On My Shoulders - John Denver</li>
@@ -40,6 +41,7 @@ function Playlists() {
           <li>Leader of the Band - Dan Fogelberg</li>            
         </ol>
       </nav>
+      </div>
     </>
     )
   }

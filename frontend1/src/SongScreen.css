@@ -15,10 +15,10 @@
     
   }
   .playlist li:nth-child(odd) {
-    background-color: black; 
+    background-color: var(--a_dullpurple); 
   }
   .playlist li:nth-child(even) {
-    background-color: #2F2F2F;
+    background-color: var(--a_lightpurple);
   }
   
   ::-webkit-scrollbar {
