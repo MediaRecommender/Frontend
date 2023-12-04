@@ -33,6 +33,9 @@ function SignUpScreen() {
         else {
             // temp; in the future this should instead tell the backend to create a new account
             setErrorMessageVisible(false)
+            // make login credentials persistent
+            window.localStorage.setItem("username", username)
+            window.localStorage.setItem("password", password)
 
             navigate("/app/genresurvey")
         }
