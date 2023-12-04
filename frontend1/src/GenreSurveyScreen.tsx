@@ -19,18 +19,17 @@ const GENRES = [
     {name:"other"},
 ]
 
+const rowCount = 3;
+
 function GenreSurveyScreen() {
     return(
         <>
-            <div>
-                
-                <img src={reactLogo} className="logo react" alt="Logo"/>
-                <p>username</p>
-            </div>
-            <div>
+            <h1>Genre Survey</h1>
+            <div className='panel'>
+                <p>Please indicate which genres you are interested in:</p>
                 <GenresTable genres={GENRES}/>
+                <button>Confirm</button>
             </div>
-            <button>Confirm</button>
         </>
     )
 }
@@ -39,8 +38,8 @@ function GenreRow({genre}:{genre:Genre}) {
     return(
         <span>
             <label>
-                {genre.name}
                 <input type='checkbox'/>
+                {genre.name}
             </label>
         </span>
     )
@@ -48,17 +47,20 @@ function GenreRow({genre}:{genre:Genre}) {
 
 function GenresTable({genres}:{genres:Array<Genre>}) {
     const rows:Array<JSX.Element> = [];
+    var counter = 0;
     genres.forEach((genre:Genre)=> {
+        counter++;
         rows.push(
             <GenreRow genre={genre}/>
         );
-        rows.push(<br/>);
+        if(counter >= rowCount) {
+            rows.push(<br/>);
+            counter = 0;
+        }
     });
 
     return(
-        <table>
-            <tbody>{rows}</tbody>
-        </table>
+        <div className='centertext'>{rows}</div>
     )
 }
 
