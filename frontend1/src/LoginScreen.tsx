@@ -50,7 +50,6 @@ function LoginScreen() {
             // backend told me the response should be a simple object with two attributes: "success", a boolean, and "message", a string
             // (for other stuff later we'll need to confer with backend)
             loginSuccess = responseObject.success;
-            console.log(responseObject.message);
         }
         // if anything goes wrong in the entire process, log the error to the console
         catch(error) {
@@ -58,9 +57,7 @@ function LoginScreen() {
             loginSuccess = false;
         }
 
-//      if (loginSuccess) {
-        // replace above with below once the backend is properly up
-        if (username == testUsername && password == testPassword) {
+      if (loginSuccess) {
             setLoginErrorDisplayed(false)
             // make login credentials persistent
             window.localStorage.setItem("username", username)
