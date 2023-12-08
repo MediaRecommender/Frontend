@@ -7,9 +7,6 @@ import { useNavigate, redirect } from "react-router-dom";
 
 const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
 
-const testUsername = "username1"
-const testPassword = "password1"
-
 
 function LoginScreen() {
 

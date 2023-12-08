@@ -3,12 +3,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg' // temp logo
 import { useNavigate } from "react-router-dom";
 
-
-const testTakenUsername = "username1"
-
 const usernameTakenErrorMsg = "Username has already been taken!"
 const emptyFieldsErrorMsg = "Please fill out all required fields!"
 
+const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
 
 function SignUpScreen() {
     const[username,setUsername] = useState('')
@@ -20,13 +18,36 @@ function SignUpScreen() {
 
     const navigate = useNavigate();
 
-    function continueButtonHandler() {
+    async function continueButtonHandler() {
+        var registerSuccess = false;
+
+        try {
+            const response = await fetch(api + "/register", {
+                method: "POST",
+                body: JSON.stringify({
+                    "username": username,
+                    "password": password,
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const responseObject = await response.json();
+
+            registerSuccess = responseObject.success;
+        }
+        catch(error) {
+            console.error("http request failed: " + error);
+            registerSuccess = false;
+        }
+
         if(username == "" || password == "") {
             setErrorMsg(emptyFieldsErrorMsg)
             setErrorMessageVisible(true)
         }
-        // this is where database connection should go
-        else if(username == testTakenUsername) {
+        
+        else if(!registerSuccess) {
             setErrorMsg(usernameTakenErrorMsg)
             setErrorMessageVisible(true)
         }
