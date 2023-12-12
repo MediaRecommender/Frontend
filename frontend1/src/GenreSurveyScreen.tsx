@@ -9,15 +9,16 @@ interface Genre {
 }
 
 const GENRES = [
-    {name:"pop"},
-    {name:"rock"},
-    {name:"country"},
-    {name:"rap"},
-    {name:"blues"},
-    {name:"kpop"},
-    {name:"kpop 2"},
-    {name:"edm"},
-    {name:"other"},
+    {name:"Pop"},
+    {name:"Rock"},
+    {name:"Jazz"},
+    {name:"Hip-Hop"},
+    {name:"Indie"},
+    {name:"EDM"},
+    {name:"Country"},
+    {name:"Classical"},
+    {name:"R&B"},
+    {name:"Metal"},
 ]
 
 const rowCount = 3;
