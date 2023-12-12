@@ -4,6 +4,8 @@ import reactLogo from './assets/react.svg' // temp logo
 
 import { useNavigate } from "react-router-dom";
 
+const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
+
 interface Genre {
     name:string;
 }
@@ -26,13 +28,55 @@ const rowCount = 3;
 function GenreSurveyScreen() {
     const navigate = useNavigate();
 
+    async function submitHandler(e) {
+        // prevent the page from getting reloaded
+        e.preventDefault()
+
+        // get the data of the form
+        const formData = new FormData(e.target)
+        
+        // turn the data into a more convenient object
+        const jsondata = Object.fromEntries(formData.entries())
+        // and get the genres by getting just the keys of that object
+        const outArray = Object.keys(jsondata)
+
+        var httpSuccess = false
+        // http request to submit
+        try {
+            const response = await fetch(api + "/genreSurvey/submit", {
+                method: "POST",
+                body: JSON.stringify({
+                    "username":window.localStorage.getItem("username"),
+                    "checkedGenres":outArray
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const responseObject = await response.json();
+
+            console.log(responseObject.message)
+            httpSuccess = responseObject.success
+        }
+        catch(error) {
+            console.error("http request failed: " + error);
+        }
+
+        if(httpSuccess) { 
+            navigate("/app/songsurvey")
+        }
+    }
+
     return(
         <>
             <h1>Genre Survey</h1>
             <div className='panel'>
-                <p>Please indicate which genres you are interested in:</p>
-                <GenresTable genres={GENRES}/>
-                <button onClick={()=>navigate("/app/songsurvey")}>Confirm</button>
+                <form onSubmit={submitHandler}>
+                    <p>Please indicate which genres you are interested in:</p>
+                    <GenresTable genres={GENRES}/>
+                    <button type='submit'>Confirm</button>
+                </form>
             </div>
         </>
     )
@@ -42,7 +86,7 @@ function GenreRow({genre}:{genre:Genre}) {
     return(
         <span>
             <label>
-                <input type='checkbox'/>
+                <input name={genre.name} type='checkbox'/>
                 {genre.name}
             </label>
         </span>
@@ -50,6 +94,10 @@ function GenreRow({genre}:{genre:Genre}) {
 }
 
 function GenresTable({genres}:{genres:Array<Genre>}) {
+    var checkedGenres = []
+
+    
+
     const rows:Array<JSX.Element> = [];
     var counter = 0;
     genres.forEach((genre:Genre)=> {
@@ -67,6 +115,5 @@ function GenresTable({genres}:{genres:Array<Genre>}) {
         <div className='centertext'>{rows}</div>
     )
 }
-
 
 export default GenreSurveyScreen
