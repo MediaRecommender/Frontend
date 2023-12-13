@@ -73,10 +73,8 @@ function SignUpScreen() {
         <>
             <div className="textcenter contentdiv">
                 <div className="disp">
-                    <img src={reactLogo} className="logo react" alt="Logo" />
-                    <h1>Media Recommender</h1>
+                    <img src="/dynamix_logo.png" className="biglogo" alt="Logo" />
                 </div>
-                <br />
                 <div className='textcenter panel' hidden={!submitting}><Spinner/></div>
                 <div className='textcenter panel' hidden={submitting}>
                     <h2>CREATE PROFILE</h2>

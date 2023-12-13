@@ -16,7 +16,7 @@ function TopBar() {
 
   return (
     <div className="topBar">
-      <img src="/Spotify.png" className="logo topbarItem"></img>
+      <img src="/dynamix_logo.png" className="logo topbarItem"></img>
       <div className="dropdown topbarItem">
         <button className="abutton">{username == null ? "not found" : username}</button>
         <div className="dropdown-content">

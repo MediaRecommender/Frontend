@@ -48,6 +48,10 @@ body {
   margin: 7% 16%;
 }
 
+.biglogo {
+  width:50%;
+}
+
 .disp {
   display:flex;
   align-items: center;
