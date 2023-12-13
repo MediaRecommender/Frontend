@@ -77,9 +77,8 @@ function LoginScreen() {
     return (
         <>
             <div className = "textcenter contentdiv">
-                <div className = "disp">
-                    <img src="/dynamix_logo.png" className="biglogo" alt="Logo" />
-                </div>
+                <img src="/dynamix_logo.png" className="biglogo" alt="Logo" />
+                <h3>personalized music recommender</h3>
                 <div className = "textcemter panel" hidden={!submitting}><Spinner/></div>
                 <div className="textcenter panel" hidden={submitting}>
                     <p hidden={!loginErrorDisplayed}>Incorrect username or password!</p>

@@ -111,6 +111,7 @@ function SongList(){
     return (
       <>
         <h1 hidden={submitting}>Select Songs</h1>
+        <h2 hidden={submitting}>Tell us what songs you like! Please select the songs from this selection that you enjoy.</h2>
         <div className='textcenter panel wider' hidden={submitting}>
         <form onSubmit={submitHandler} className='playlist'>
           <ol className="songs">

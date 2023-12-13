@@ -72,9 +72,8 @@ function SignUpScreen() {
     return (
         <>
             <div className="textcenter contentdiv">
-                <div className="disp">
                     <img src="/dynamix_logo.png" className="biglogo" alt="Logo" />
-                </div>
+                <h3>personalized music recommender</h3>
                 <div className='textcenter panel' hidden={!submitting}><Spinner/></div>
                 <div className='textcenter panel' hidden={submitting}>
                     <h2>CREATE PROFILE</h2>
