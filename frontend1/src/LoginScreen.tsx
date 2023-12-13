@@ -3,6 +3,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg' // temp logo
 import { useNavigate, redirect } from "react-router-dom";
 
+import Spinner from './Spinner';
+
 //import './App.css'
 
 const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
@@ -17,9 +19,13 @@ function LoginScreen() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const[submitting, setSubmitting] = useState(false);
+
     const [loginErrorDisplayed, setLoginErrorDisplayed] = useState(false);
 
     async function loginHandler() {
+        setSubmitting(true);
+
         // if loginSuccess is true, the login will proceed; otherwise, show an error
         var loginSuccess = true;
 
@@ -63,6 +69,7 @@ function LoginScreen() {
             navigate("/app")
         }
         else {
+            setSubmitting(false)
             setLoginErrorDisplayed(true)
         }
     }
@@ -74,8 +81,8 @@ function LoginScreen() {
                     <img src={reactLogo} className="logo react" alt="Logo" />
                     <h1>Media Recommender</h1>
                 </div>
-
-                <div className="textcenter panel">
+                <div className = "textcemter panel" hidden={!submitting}><Spinner/></div>
+                <div className="textcenter panel" hidden={submitting}>
                     <p hidden={!loginErrorDisplayed}>Incorrect username or password!</p>
                     <input value={username} onChange={e => setUsername(e.target.value)} type="text" placeholder='Username' />
                     <br />
@@ -86,7 +93,7 @@ function LoginScreen() {
                     }}>Log In</button>
                 </div>
 
-                <a className='registerlink' onClick={() => { navigate("signup") }}>Don't have an account? Register here!</a>
+                <a className='registerlink' hidden={submitting} onClick={() => { navigate("signup") }}>Don't have an account? Register here!</a>
 
             </div>
         </>
