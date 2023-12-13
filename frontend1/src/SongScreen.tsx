@@ -1,57 +1,128 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './SongScreen.css'
 import { useNavigate } from "react-router-dom";
-function Songs() {
-  const navigate = useNavigate();
-  return (
-    <>
-      <h1>Select Songs</h1>
-      <div className='textcenter panel wider'>
-      <nav className='playlist'>
-        <ol className="songs">
-          <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
-          <li><input type="checkbox"></input> Mona Lisa - Nat King Cole</li>
-          <li><input type="checkbox"></input> Something - The Beatles</li>
-          <li><input type="checkbox"></input> Vincent - Don McLean</li>
-          <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>
-          <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
-          <li><input type="checkbox"></input> Mona Lisa - Nat King Cole</li>
-          <li><input type="checkbox"></input> Something - The Beatles</li>
-          <li><input type="checkbox"></input> Vincent - Don McLean</li>
-          <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>
-          <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
-          <li><input type="checkbox"></input> Mona Lisa - Nat King Cole</li>
-          <li><input type="checkbox"></input> Something - The Beatles</li>
-          <li><input type="checkbox"></input> Vincent - Don McLean</li>
-          <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>
-          <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
-          <li><input type="checkbox"></input> Mona Lisa - Nat King Cole</li>
-          <li><input type="checkbox"></input> Something - The Beatles</li>
-          <li><input type="checkbox"></input> Vincent - Don McLean</li>
-          <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>
-          <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
-          <li><input type="checkbox"></input> Mona Lisa - Nat King Cole</li>
-          <li><input type="checkbox"></input> Something - The Beatles</li>
-          <li><input type="checkbox"></input> Vincent - Don McLean</li>
-          <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>
-          <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
-          <li><input type="checkbox"></input> Mona Lisa - Nat King Cole</li>
-          <li><input type="checkbox"></input> Something - The Beatles</li>
-          <li><input type="checkbox"></input> Vincent - Don McLean</li>
-          <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>            
-        </ol>
-      </nav>
-      <button className='backButton' onClick={()=>navigate("/app/genresurvey")}>Back</button>
-      <button onClick={()=>navigate("/app")}>Finish</button>
-      </div>
-    </>
-    )
+
+const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
+
+function SongList(){
+
+    const[username,setUsername] = useState('')
+    const [titles, setTitles] = useState([]);
+    const [images, setImages] = useState([]);
+    const [artists, setArtists] = useState([]);
+
+    async function getSongData() {
+
+      try {
+          const response = await fetch(api + "/playlist", {
+            method: "POST",
+            // data is to be sent in a simple two-attribute object
+            body: JSON.stringify({
+                "username": window.localStorage.getItem("username"),
+                "artists": artists,
+                "images": images,
+                "titles": titles
+            }),
+            headers: {
+                "Content-type": "application/json"
+            }
+          });
+
+          const responseObject = await response.json();
+          console.log(JSON.stringify(responseObject))
+          return responseObject;
+      }
+      catch(error) {
+        console.error("http request failed");
+    }  
   }
+  useEffect(() => {
+    const a = async () => {
+        var songData = await getSongData()
+        setArtists(songData.artists)
+        setImages(songData.images)
+        setTitles(songData.titles)
+        console.log(songData)
+    }
+    a()
+  }, [])
+
+  return (
+    <ol>
+        <li><input type="checkbox"></input>{artists[0]} — {titles[0]}</li>
+        <li><input type="checkbox"></input>{artists[1]} — {titles[1]}</li>
+        <li><input type="checkbox"></input>{artists[2]} — {titles[2]}</li>
+        <li><input type="checkbox"></input>{artists[3]} — {titles[3]}</li>
+        <li><input type="checkbox"></input>{artists[4]} — {titles[4]}</li>
+        <li><input type="checkbox"></input>{artists[5]} — {titles[5]}</li>
+        <li><input type="checkbox"></input>{artists[6]} — {titles[6]}</li>
+        <li><input type="checkbox"></input>{artists[7]} — {titles[7]}</li>
+        <li><input type="checkbox"></input>{artists[8]} — {titles[8]}</li>
+        <li><input type="checkbox"></input>{artists[9]} — {titles[9]}</li>
+    </ol>
+  )
+}
   function SongScreen() {
-    const [count, setCount] = useState(0)
+    const [submitting, setSubmitting] = useState(false)
+
+    const navigate = useNavigate();
+
+    async function submitHandler(e) {
+      setSubmitting(true)
+      // prevent the page from getting reloaded
+      e.preventDefault()
+
+      // get the data of the form
+      const formData = new FormData(e.target)
+
+      // turn the data into a more convenient object
+      const jsondata = Object.fromEntries(formData.entries())
+      // and get the genres by getting just the keys of that object
+      const outArray = Object.keys(jsondata)
+
+      var httpSuccess = false
+        // http request to submit
+        try {
+            const response = await fetch(api + "/genreSongs/submit", {
+                method: "POST",
+                body: JSON.stringify({
+                    "username": window.localStorage.getItem("username"),
+                    "checkedSongs": outArray
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const responseObject = await response.json();
+
+            console.log(responseObject.message)
+            httpSuccess = responseObject.success
+        }
+        catch (error) {
+            console.error("http request failed: " + error);
+        }
+
+        if (httpSuccess) {
+            navigate("/app/playlist")
+        }
+        setSubmitting(false)
+    }
     return (
-        <Songs />
-    )
+      <>
+        <h1 hidden={submitting}>Select Songs</h1>
+        <div className='textcenter panel wider' hidden={submitting}>
+        <form onSubmit={submitHandler} className='playlist'>
+          <ol className="songs">
+            <SongList />
+            <button className='backButton' onClick={()=>navigate("/app/genresurvey")}>Back</button>
+            <button type='submit'>Finish</button>      
+          </ol>
+        </form>
+
+        </div>
+      </>
+      )
   }
   
   export default SongScreen
