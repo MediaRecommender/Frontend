@@ -7,7 +7,7 @@ function TopBar() {
   var password = window.localStorage.getItem("password");
 
   const navigate = useNavigate();
-  
+
   function logoutUser() {
     window.localStorage.removeItem("username");
     window.localStorage.removeItem("password");
@@ -15,20 +15,20 @@ function TopBar() {
   }
 
   return (
-    <div className = "topBar">
-      <img src = "Spotify.png" className="logo"></img>
-      <button className="logOut" onClick={logoutUser}>Logout</button>
-      {/* <Link to="/app" className="account-name">{username == null ? "not found":username}</Link> */}
-      <div className="dropdown">
-        <button className="account-button">{username == null ? "not found":username}</button>
+    <div className="topBar">
+      <img src="/Spotify.png" className="logo topbarItem"></img>
+      <div className="dropdown topbarItem">
+        <button className="abutton">{username == null ? "not found" : username}</button>
         <div className="dropdown-content">
-        <Link to="playlist">Your Playlist</Link>
-        <Link to="genresurvey">Genre Survey</Link>
-        <Link to="songsurvey">Song Survey</Link>
-        <Link to="delete">Delete Account</Link>
+          <Link to="/app">Your Playlist</Link>
+          <Link to="/app/genresurvey">Genre Survey</Link>
+          <Link to="/app/songsurvey">Song Survey</Link>
+          <Link to="/app/delete" className="deleteButton">Delete Account</Link>
         </div>
       </div>
-</div>
+      <button className="abutton topbarItem dbutton" onClick={logoutUser}>Logout</button>
+      
+    </div>
   )
 }
 

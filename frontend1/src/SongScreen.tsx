@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import './SongScreen.css'
-import TopBar from './TopBar.tsx'
-
+import { useNavigate } from "react-router-dom";
 function Songs() {
+  const navigate = useNavigate();
   return (
-    <div>
-      <h1 className = "songSelect">Select Songs</h1>
+    <>
+      <h1>Select Songs</h1>
+      <div className='textcenter panel wider'>
       <nav className='playlist'>
         <ol className="songs">
           <li><input type="checkbox"></input> Sunshine On My Shoulders - John Denver</li>
@@ -40,17 +41,16 @@ function Songs() {
           <li><input type="checkbox"></input> Leader of the Band - Dan Fogelberg</li>            
         </ol>
       </nav>
-    </div>
+      <button className='backButton' onClick={()=>navigate("/app/genresurvey")}>Back</button>
+      <button onClick={()=>navigate("/app")}>Finish</button>
+      </div>
+    </>
     )
   }
   function SongScreen() {
     const [count, setCount] = useState(0)
     return (
-    <body className="body">
-      <div className="center">
         <Songs />
-      </div>
-    </body>
     )
   }
   

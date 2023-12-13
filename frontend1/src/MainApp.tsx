@@ -5,7 +5,7 @@ function MainApp() {
     return (
         <>
             <TopBar/>
-            <div>
+            <div className="textcenter contentdiv lesstoproom">
                 <Outlet/>
             </div>
         </>

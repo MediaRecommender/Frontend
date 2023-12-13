@@ -66,24 +66,22 @@ function SongList(){
 function Playlists() {
 
   return (
-    <div>
-      <h1 className = "playlistTitle">Playlist</h1>
+    <>
+    <h1>Your Playlist</h1>
+      <div className='textcenter panel wider'>
       <nav className='playlist'>
         <ol id="songList" className="songs">
           <SongList />    
         </ol>
       </nav>
-    </div>
+      </div>
+    </>
     )
   }
   function PlaylistScreen() {
     const [count, setCount] = useState(0)
     return (
-    <body className="body">
-      <div className="center">
         <Playlists />
-      </div>
-    </body>
     )
   }
   
