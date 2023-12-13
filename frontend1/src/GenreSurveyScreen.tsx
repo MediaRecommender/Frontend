@@ -4,6 +4,8 @@ import reactLogo from './assets/react.svg' // temp logo
 
 import { useNavigate } from "react-router-dom";
 
+import Spinner from './Spinner';
+
 const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
 
 interface Genre {
@@ -82,7 +84,7 @@ function GenreSurveyScreen() {
     )
 }
 
-function GenreRow({ genre, checkedGenres }: { genre: Genre, checkedGenres:Array<String>}) {
+function GenreRow({ genre, checkedGenres }: { genre: Genre, checkedGenres: Array<String> }) {
     return (
         <span>
             <label>
@@ -112,7 +114,6 @@ function GenresTable({ genres }: { genres: Array<Genre> }) {
 
             const responseObject = await response.json();
 
-            console.log(JSON.stringify(responseObject))
             return responseObject.checkedGenres
         }
         catch (error) {
@@ -127,32 +128,31 @@ function GenresTable({ genres }: { genres: Array<Genre> }) {
         const a = async () => {
             setLoading(true)
             var acheckedGenres = await getCheckedGenres()
-            console.log(acheckedGenres)
             setCheckedGenres(acheckedGenres)
-            
+
             setLoading(false)
         }
         a()
     }, [])
     var counter = 0;
-            genres.forEach((genre: Genre) => {
-                counter++;
-                rows.push(
-                    <GenreRow genre={genre} checkedGenres={checkedGenres}/>
-                );
-                if (counter >= rowCount) {
-                    rows.push(<br />);
-                    counter = 0;
-                }
-            })
+    genres.forEach((genre: Genre) => {
+        counter++;
+        rows.push(
+            <GenreRow genre={genre} checkedGenres={checkedGenres} />
+        );
+        if (counter >= rowCount) {
+            rows.push(<br />);
+            counter = 0;
+        }
+    })
+
     if (loading) {
         return (
-            <p>loading...</p>
+            <><Spinner/><br/></>
+            
         )
     }
-
     else {
-        console.log(checkedGenres)
         return (
             <div className='centertext'>{rows}</div>
         )
