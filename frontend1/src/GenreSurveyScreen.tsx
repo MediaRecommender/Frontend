@@ -28,9 +28,12 @@ const GENRES = [
 const rowCount = 3;
 
 function GenreSurveyScreen() {
+    const [submitting, setSubmitting] = useState(false)
+
     const navigate = useNavigate();
 
     async function submitHandler(e) {
+        setSubmitting(true)
         // prevent the page from getting reloaded
         e.preventDefault()
 
@@ -68,18 +71,21 @@ function GenreSurveyScreen() {
         if (httpSuccess) {
             navigate("/app/songsurvey")
         }
+        setSubmitting(false)
     }
 
     return (
         <>
-            <h1>Genre Survey</h1>
-            <div className='panel'>
+            <h1 hidden={submitting}>Genre Survey</h1>
+            <div className='panel' hidden={submitting}>
                 <form onSubmit={submitHandler}>
                     <p>Please indicate which genres you are interested in:</p>
                     <GenresTable genres={GENRES} />
                     <button type='submit'>Confirm</button>
                 </form>
             </div>
+            <h2 hidden={!submitting}>Finding some songs for you...</h2>
+            <div hidden={!submitting}><Spinner/></div>
         </>
     )
 }
