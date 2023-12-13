@@ -22,6 +22,9 @@
   white-space:pre;
   margin:0;
 }
+.playlist li img{
+  max-height: 100px;
+}
 .playlist li:before {
   content: counter(mycounter) "    ";
   counter-increment: mycounter;
@@ -70,4 +73,9 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: gray; 
+}
+.SongList img{
+  max-width: 10px;
+  max-height: 10px;
+  height: 10%;
 }
