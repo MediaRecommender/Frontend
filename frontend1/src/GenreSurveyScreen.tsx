@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import reactLogo from './assets/react.svg' // temp logo
 
@@ -7,20 +7,20 @@ import { useNavigate } from "react-router-dom";
 const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
 
 interface Genre {
-    name:string;
+    name: string;
 }
 
 const GENRES = [
-    {name:"Pop"},
-    {name:"Rock"},
-    {name:"Jazz"},
-    {name:"Hip-Hop"},
-    {name:"Indie"},
-    {name:"EDM"},
-    {name:"Country"},
-    {name:"Classical"},
-    {name:"R&B"},
-    {name:"Metal"},
+    { name: "Pop" },
+    { name: "Rock" },
+    { name: "Jazz" },
+    { name: "Hip-Hop" },
+    { name: "Indie" },
+    { name: "EDM" },
+    { name: "Country" },
+    { name: "Classical" },
+    { name: "R&B" },
+    { name: "Metal" },
 ]
 
 const rowCount = 3;
@@ -34,7 +34,7 @@ function GenreSurveyScreen() {
 
         // get the data of the form
         const formData = new FormData(e.target)
-        
+
         // turn the data into a more convenient object
         const jsondata = Object.fromEntries(formData.entries())
         // and get the genres by getting just the keys of that object
@@ -46,8 +46,8 @@ function GenreSurveyScreen() {
             const response = await fetch(api + "/genreSurvey/submit", {
                 method: "POST",
                 body: JSON.stringify({
-                    "username":window.localStorage.getItem("username"),
-                    "checkedGenres":outArray
+                    "username": window.localStorage.getItem("username"),
+                    "checkedGenres": outArray
                 }),
                 headers: {
                     "Content-Type": "application/json"
@@ -59,22 +59,22 @@ function GenreSurveyScreen() {
             console.log(responseObject.message)
             httpSuccess = responseObject.success
         }
-        catch(error) {
+        catch (error) {
             console.error("http request failed: " + error);
         }
 
-        if(httpSuccess) { 
+        if (httpSuccess) {
             navigate("/app/songsurvey")
         }
     }
 
-    return(
+    return (
         <>
             <h1>Genre Survey</h1>
             <div className='panel'>
                 <form onSubmit={submitHandler}>
                     <p>Please indicate which genres you are interested in:</p>
-                    <GenresTable genres={GENRES}/>
+                    <GenresTable genres={GENRES} />
                     <button type='submit'>Confirm</button>
                 </form>
             </div>
@@ -82,38 +82,81 @@ function GenreSurveyScreen() {
     )
 }
 
-function GenreRow({genre}:{genre:Genre}) {
-    return(
+function GenreRow({ genre, checkedGenres }: { genre: Genre, checkedGenres:Array<String>}) {
+    return (
         <span>
             <label>
-                <input name={genre.name} type='checkbox'/>
+                <input name={genre.name} type='checkbox' defaultChecked={checkedGenres.includes(genre.name)} />
                 {genre.name}
             </label>
         </span>
     )
 }
 
-function GenresTable({genres}:{genres:Array<Genre>}) {
-    var checkedGenres = []
+function GenresTable({ genres }: { genres: Array<Genre> }) {
+    const [loading, setLoading] = useState(true)
+    const [checkedGenres, setCheckedGenres] = useState([])
 
-    
+    async function getCheckedGenres() {
 
-    const rows:Array<JSX.Element> = [];
-    var counter = 0;
-    genres.forEach((genre:Genre)=> {
-        counter++;
-        rows.push(
-            <GenreRow genre={genre}/>
-        );
-        if(counter >= rowCount) {
-            rows.push(<br/>);
-            counter = 0;
+        try {
+            const response = await fetch(api + "/genreSurvey", {
+                method: "POST",
+                body: JSON.stringify({
+                    "username": window.localStorage.getItem("username")
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            const responseObject = await response.json();
+
+            console.log(JSON.stringify(responseObject))
+            return responseObject.checkedGenres
         }
-    });
+        catch (error) {
+            console.error("http request failed: " + error);
+        }
+    }
 
-    return(
-        <div className='centertext'>{rows}</div>
-    )
+    const rows: Array<JSX.Element> = [];
+
+
+    useEffect(() => {
+        const a = async () => {
+            setLoading(true)
+            var acheckedGenres = await getCheckedGenres()
+            console.log(acheckedGenres)
+            setCheckedGenres(acheckedGenres)
+            
+            setLoading(false)
+        }
+        a()
+    }, [])
+    var counter = 0;
+            genres.forEach((genre: Genre) => {
+                counter++;
+                rows.push(
+                    <GenreRow genre={genre} checkedGenres={checkedGenres}/>
+                );
+                if (counter >= rowCount) {
+                    rows.push(<br />);
+                    counter = 0;
+                }
+            })
+    if (loading) {
+        return (
+            <p>loading...</p>
+        )
+    }
+
+    else {
+        console.log(checkedGenres)
+        return (
+            <div className='centertext'>{rows}</div>
+        )
+    }
 }
 
 export default GenreSurveyScreen
