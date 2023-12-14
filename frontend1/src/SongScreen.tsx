@@ -50,16 +50,16 @@ function SongList(){
 
   return (
     <ol>
-        <li><input type="checkbox"></input>{artists[0]} - {titles[0]}</li>
-        <li><input type="checkbox"></input>{artists[1]} - {titles[1]}</li>
-        <li><input type="checkbox"></input>{artists[2]} - {titles[2]}</li>
-        <li><input type="checkbox"></input>{artists[3]} - {titles[3]}</li>
-        <li><input type="checkbox"></input>{artists[4]} - {titles[4]}</li>
-        <li><input type="checkbox"></input>{artists[5]} - {titles[5]}</li>
-        <li><input type="checkbox"></input>{artists[6]} - {titles[6]}</li>
-        <li><input type="checkbox"></input>{artists[7]} - {titles[7]}</li>
-        <li><input type="checkbox"></input>{artists[8]} - {titles[8]}</li>
-        <li><input type="checkbox"></input>{artists[9]} - {titles[9]}</li>
+        <li><input type="checkbox" name = {artists[0] + " - " + titles[0]}></input>{artists[0]} - {titles[0]}</li>
+        <li><input type="checkbox" name = {artists[1] + " - " + titles[1]}></input>{artists[1]} - {titles[1]}</li>
+        <li><input type="checkbox" name = {artists[2] + " - " + titles[2]}></input>{artists[2]} - {titles[2]}</li>
+        <li><input type="checkbox" name = {artists[3] + " - " + titles[3]}></input>{artists[3]} - {titles[3]}</li>
+        <li><input type="checkbox" name = {artists[4] + " - " + titles[4]}></input>{artists[4]} - {titles[4]}</li>
+        <li><input type="checkbox" name = {artists[5] + " - " + titles[5]}></input>{artists[5]} - {titles[5]}</li>
+        <li><input type="checkbox" name = {artists[6] + " - " + titles[6]}></input>{artists[6]} - {titles[6]}</li>
+        <li><input type="checkbox" name = {artists[7] + " - " + titles[7]}></input>{artists[7]} - {titles[7]}</li>
+        <li><input type="checkbox" name = {artists[8] + " - " + titles[8]}></input>{artists[8]} - {titles[8]}</li>
+        <li><input type="checkbox" name = {artists[9] + " - " + titles[9]}></input>{artists[9]} - {titles[9]}</li>
     </ol>
   )
 }
@@ -78,6 +78,7 @@ function SongList(){
 
       // turn the data into a more convenient object
       const jsondata = Object.fromEntries(formData.entries())
+      console.log(jsondata)
       // and get the genres by getting just the keys of that object
       const outArray = Object.keys(jsondata)
 
