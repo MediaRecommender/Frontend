@@ -15,7 +15,7 @@ function SongList(){
     async function getSongData() {
 
       try {
-          const response = await fetch(api + "/playlist", {
+          const response = await fetch(api + "/genreSongs", {
             method: "POST",
             // data is to be sent in a simple two-attribute object
             body: JSON.stringify({
