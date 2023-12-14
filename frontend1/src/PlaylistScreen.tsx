@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import './PlaylistScreen.css'
 import TopBar from './TopBar.tsx'
+import Spinner from './Spinner';
 
 const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
 
 function SongList(){
 
-    const[username,setUsername] = useState('')
+    const [submitting, setSubmitting] = useState(false);
     const [titles, setTitles] = useState([]);
     const [images, setImages] = useState([]);
     const [artists, setArtists] = useState([]);
@@ -38,15 +39,21 @@ function SongList(){
   }
   useEffect(() => {
     const a = async () => {
+        setSubmitting(true)
         var songData = await getSongData()
         setArtists(songData.artists)
         setImages(songData.images)
         setTitles(songData.titles)
         console.log(songData)
+        setSubmitting(false)
     }
     a()
   }, [])
-
+  if(submitting){
+    return(
+      <Spinner/>
+    )
+  }
   return (
     <ol>
         <li><img src={images[0]}></img>{artists[0]} - {titles[0]}</li>
