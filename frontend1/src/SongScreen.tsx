@@ -50,7 +50,8 @@ function SongList(){
   }, [])
   if(submitting) {
     return(
-      <Spinner/>
+      <><Spinner/><br/></>
+      
     )
   }
   return (

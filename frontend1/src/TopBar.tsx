@@ -20,7 +20,7 @@ function TopBar() {
       <div className="dropdown topbarItem">
         <button className="abutton">{username == null ? "not found" : username}</button>
         <div className="dropdown-content">
-          <Link to="/app/playlist">Your Playlist</Link>
+          <Link to="/app/">Your Playlist</Link>
           <Link to="/app/genresurvey">Genre Survey</Link>
           <Link to="/app/songsurvey">Song Survey</Link>
           <Link to="/app/delete" className="deleteButton">Delete Account</Link>
