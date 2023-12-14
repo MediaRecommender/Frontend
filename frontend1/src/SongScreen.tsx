@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './SongScreen.css'
 import { useNavigate } from "react-router-dom";
+import Spinner from './Spinner';
 
 const api = "http://ec2-18-191-32-136.us-east-2.compute.amazonaws.com"
 
@@ -49,16 +50,16 @@ function SongList(){
 
   return (
     <ol>
-        <li><input type="checkbox"></input>{artists[0]} — {titles[0]}</li>
-        <li><input type="checkbox"></input>{artists[1]} — {titles[1]}</li>
-        <li><input type="checkbox"></input>{artists[2]} — {titles[2]}</li>
-        <li><input type="checkbox"></input>{artists[3]} — {titles[3]}</li>
-        <li><input type="checkbox"></input>{artists[4]} — {titles[4]}</li>
-        <li><input type="checkbox"></input>{artists[5]} — {titles[5]}</li>
-        <li><input type="checkbox"></input>{artists[6]} — {titles[6]}</li>
-        <li><input type="checkbox"></input>{artists[7]} — {titles[7]}</li>
-        <li><input type="checkbox"></input>{artists[8]} — {titles[8]}</li>
-        <li><input type="checkbox"></input>{artists[9]} — {titles[9]}</li>
+        <li><input type="checkbox"></input>{artists[0]} - {titles[0]}</li>
+        <li><input type="checkbox"></input>{artists[1]} - {titles[1]}</li>
+        <li><input type="checkbox"></input>{artists[2]} - {titles[2]}</li>
+        <li><input type="checkbox"></input>{artists[3]} - {titles[3]}</li>
+        <li><input type="checkbox"></input>{artists[4]} - {titles[4]}</li>
+        <li><input type="checkbox"></input>{artists[5]} - {titles[5]}</li>
+        <li><input type="checkbox"></input>{artists[6]} - {titles[6]}</li>
+        <li><input type="checkbox"></input>{artists[7]} - {titles[7]}</li>
+        <li><input type="checkbox"></input>{artists[8]} - {titles[8]}</li>
+        <li><input type="checkbox"></input>{artists[9]} - {titles[9]}</li>
     </ol>
   )
 }
@@ -87,7 +88,7 @@ function SongList(){
                 method: "POST",
                 body: JSON.stringify({
                     "username": window.localStorage.getItem("username"),
-                    "checkedSongs": outArray
+                    "checkedGenreSongs": outArray
                 }),
                 headers: {
                     "Content-Type": "application/json"
@@ -120,8 +121,9 @@ function SongList(){
             <button type='submit'>Finish</button>      
           </ol>
         </form>
-
         </div>
+        <h2 hidden={!submitting}>Generating your playlist...</h2>
+        <div hidden={!submitting}><Spinner/></div>
       </>
       )
   }
