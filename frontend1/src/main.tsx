@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         element:<GenreSurveyScreen/>
       },
       {
-        path:"playlist",
+        path:"",
         element:<PlaylistScreen/>
       },
       {
